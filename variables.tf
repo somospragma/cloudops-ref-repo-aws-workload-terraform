@@ -1,48 +1,66 @@
-##################################################
-# Variable Globales
-##################################################
-#
-variable "client" {
-  type = string
-}
+###########################################
+########## Common variables ###############
+###########################################
 
-#
-variable "environment" {
-  type = string
-}
-
-#
-variable "aws_region" {
-  type = string
-}
-
-#
 variable "profile" {
   type = string
+  description = "Profile name containing the access credentials to deploy the infrastructure on AWS"
 }
 
-#
 variable "common_tags" {
-    type = map(string)
-    description = "Tags comunes aplicadas a los recursos"
+  type = map(string)
+  description = "Common tags to be applied to the resources"
 }
 
-#
+variable "aws_region" {
+  type = string
+  description = "AWS region where resources will be deployed"
+}
+
+variable "environment" {
+  type = string
+  description = "Environment where resources will be deployed"
+}
+
+variable "client" {
+  type = string
+  description = "Client name"
+}
+
 variable "project" {
   type = string  
+  description = "Project name"
 }
 
+variable "application" {
+  type = string
+  description = "Application name"
+}
 
-###############################################################
-# Variables IAM - Roles Task - Task Executions - App01
-###############################################################
-# Variables Rol Task execution
-variable "functionality_execution" {
+variable "functionality" {
   type = string
+  description = "Functionality name"
 }
-variable "application_execution" {
+
+###########################################
+############ ALB variables ################
+###########################################
+
+variable "port_number" {
+  type = number
+  description = "Port number"
+}
+
+variable "acm_arn_certificate" {
   type = string
+  description = "ARN of ACM certificate"
 }
+
+#################################################
+# IAM - Task Roles - Task Executions - Variables
+#################################################
+
+# Task execution role variables
 variable "path_execution" {
   type = string
 }
@@ -63,13 +81,7 @@ variable "service_execution" {
   
 }
 
-# Variables Rol Task 
-variable "functionality_task" {
-  type = string
-}
-variable "application_task" {
-  type = string
-}
+# Task role variables 
 variable "path_task" {
   type = string
 }
@@ -87,14 +99,19 @@ variable "values_task" {
 }
 variable "service_task" {
   type = string
-  
 }
 
-###############################################################
-# Variables ECS
-###############################################################
 
-variable "application" {
-    description = "Nombre de la aplicacion"
-    type = string
+###########################################
+############ ECS variables ################
+###########################################
+
+variable "memory" {
+  type = number
+  description = "Memory value"
+}
+
+variable "cpu" {
+  type = number
+  description = "CPU value"
 }

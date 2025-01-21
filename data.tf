@@ -1,7 +1,7 @@
-####################################################################
-# Data Name VPC - Este data trea el resultado de la Infraestructura 
-# creada en transversal
-####################################################################
+###########################################
+# VPC data name
+# Value comes from Transversal Module
+###########################################
 data "aws_vpc" "vpc" {
   provider = aws.pra_idp_dev
   filter {
@@ -10,10 +10,10 @@ data "aws_vpc" "vpc" {
   }
 }
 
-####################################################################
-# Data Name Subnet Publica - Este data trea el resultado de la 
-# Infraestructura  creada en transversal
-####################################################################
+###########################################
+# Public subnets data names
+# Values come from Transversal Module
+###########################################
 
 data "aws_subnet" "public_subnet_1" {
   provider = aws.pra_idp_dev
@@ -31,10 +31,10 @@ data "aws_subnet" "public_subnet_2" {
   }
 }
 
-####################################################################
-# Data Name Subnet Service - Este data trea el resultado de la 
-# Infraestructura  creada en transversal
-####################################################################
+###########################################
+# Service subnets data names
+# Values come from Transversal Module
+###########################################
 
 data "aws_subnet" "service_subnet_1" {
   provider = aws.pra_idp_dev
@@ -52,12 +52,9 @@ data "aws_subnet" "service_subnet_2" {
   }
 }
 
-
-
-####################################################################
+###########################################
 # Data Account
-# 
-####################################################################
+###########################################
 data "aws_caller_identity" "current" {
   provider = aws.pra_idp_dev
 }

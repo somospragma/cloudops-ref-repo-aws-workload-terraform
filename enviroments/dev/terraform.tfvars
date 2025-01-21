@@ -1,38 +1,29 @@
-###############################################################
-# Variables Globales
-###############################################################
+###########################################
+########## Common variables ###############
+###########################################
 
-aws_region = "us-east-1"
-
-#
-profile = "pra_idp_dev"
-
-#
+profile     = "pra_idp_dev"
+aws_region  = "us-east-1"
 environment = "dev"
-
-#
-client = "pragma"
-
-#
-project = "fc"
-#
-application="app01"
-#
+client      = "cliente01"
+project     = "proyecto01"
+application = "app01"
 common_tags = {
-  environment  = "dev"
-  project-name = "Modulos Referencia"
-  cost-center  = "-"
-  owner        = "cristian.noguera@pragma.com.co"
-  area         = "KCCC"
-  provisioned  = "terraform"
-  datatype     = "interno"
+  environment   = "dev"
+  project-name  = "proyecto01"
+  cost-center   = "xxx"
+  owner         = "xxx"
+  area          = "xxx"
+  provisioned   = "xxx"
+  datatype      = "xxx"
 }
 
 
-###############################################################
-# Variables IAM - Roles Task - Task Executions
-###############################################################
-# Rol Excution Task
+#################################################
+# IAM - Task Roles - Task Executions - Variables
+#################################################
+
+# Task execution role
 functionality_execution = "web001"
 application_execution   = "app01"
 service_execution       = "execution"
@@ -42,7 +33,7 @@ test_execution          = "StringLike"
 variable_execution      = "aws:RequestTag/project"
 values_execution        = ["hefesto"]
 
-# Rol Task
+# Task role
 functionality_task = "web001"
 application_task   = "app01"
 service_task       = "task"
