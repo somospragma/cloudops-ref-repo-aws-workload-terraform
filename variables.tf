@@ -46,16 +46,28 @@ variable "functionality" {
 ############ ALB variables ################
 ###########################################
 
-variable "port_number" {
+variable "port" {
   type = number
   description = "Port number"
 }
 
-variable "acm_arn_certificate" {
+variable "arn_acm" {
   type = string
   description = "ARN of ACM certificate"
 }
 
+#################################################
+# Module SG ALB 
+#################################################
+variable "service_alb" {
+  type = string
+  description = "Service name for security group ALB" 
+}
+
+variable "functionality_alb" {
+  type = string
+  description = "Functionality name for security group ALB" 
+}
 #################################################
 # IAM - Task Roles - Task Executions - Variables
 #################################################
@@ -66,15 +78,6 @@ variable "path_execution" {
 }
 variable "type_execution" {
   type = string
-}
-variable "test_execution" {
-  type = string
-}
-variable "variable_execution" {
-  type = string
-}
-variable "values_execution" {
-  type = list(string)
 }
 variable "service_execution" {
   type = string
@@ -87,15 +90,6 @@ variable "path_task" {
 }
 variable "type_task" {
   type = string
-}
-variable "test_task" {
-  type = string
-}
-variable "variable_task" {
-  type = string
-}
-variable "values_task" {
-  type = list(string)
 }
 variable "service_task" {
   type = string
@@ -114,4 +108,14 @@ variable "memory" {
 variable "cpu" {
   type = number
   description = "CPU value"
+}
+
+variable "health_path" {
+  type = string
+  description = "Health Path value"
+}
+
+variable "url_image_respository" {
+  type = string
+  description = "ARN Image respository"
 }

@@ -5,17 +5,18 @@
 profile     = "pra_idp_dev"
 aws_region  = "us-east-1"
 environment = "dev"
-client      = "cliente01"
-project     = "proyecto01"
+client      = "pragma"
+project     = "fc"
 application = "app01"
+functionality = "web001"
 common_tags = {
-  environment   = "dev"
-  project-name  = "proyecto01"
-  cost-center   = "xxx"
-  owner         = "xxx"
-  area          = "xxx"
-  provisioned   = "xxx"
-  datatype      = "xxx"
+  environment  = "dev"
+  project-name = "Modulos Referencia"
+  cost-center  = "-"
+  owner        = "cristian.noguera@pragma.com.co"
+  area         = "KCCC"
+  provisioned  = "terraform"
+  datatype     = "interno"
 }
 
 
@@ -24,21 +25,28 @@ common_tags = {
 #################################################
 
 # Task execution role
-functionality_execution = "web001"
-application_execution   = "app01"
 service_execution       = "execution"
 path_execution          = "/service-role/"
-type_execution          = "AWS"
-test_execution          = "StringLike"
-variable_execution      = "aws:RequestTag/project"
-values_execution        = ["hefesto"]
+type_execution          = "Service"
 
 # Task role
-functionality_task = "web001"
-application_task   = "app01"
 service_task       = "task"
 path_task          = "/service-role/"
-type_task          = "AWS"
-test_task          = "StringLike"
-variable_task      = "aws:RequestTag/project"
-values_task        = ["hefesto"]
+type_task          = "Service"
+
+
+#################################################
+# ECS - Service - Task - Variables
+#################################################
+arn_acm = "arn:aws:acm:us-east-1:008971642453:certificate/7cb55d32-3f7c-4311-9b78-5d6da1cc6448"
+cpu = 256
+memory = 512
+port = "80"
+health_path = "/"
+url_image_respository = "008971642453.dkr.ecr.us-east-1.amazonaws.com/pragma-fc-dev-nginx-ecr"
+
+#################################################
+# SG ALB 
+#################################################
+service_alb = "alb"
+functionality_alb = "back"
