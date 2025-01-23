@@ -319,7 +319,7 @@ module "ecs_cluster_functionality" {
 ######### ECS Service Module ##############
 ###########################################
 
-module "module_ecs_service_functionality" {
+module "ecs_service_functionality" {
   #Before using the module, once you have the new location of your repo, you need to change the source value.
   source = "git::https://github.com/somospragma/cloudops-ref-repo-aws-ecs-service-terraform.git?ref=feature/ecs-service-module-init"
 
@@ -341,7 +341,7 @@ module "module_ecs_service_functionality" {
       memory                   = var.memory
       cpu                      = var.cpu
       cpu_container            = var.cpu
-      image                    = var.url_image_respository # PENDING FOR VALIDATION
+      image                    = var.url_image_respository
       image_version            = "latest"
       requires_compatibilities = ["FARGATE"]
       cluster_name             = module.ecs_cluster_functionality.cluster_info["${var.application}"].cluster_name
