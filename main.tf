@@ -16,8 +16,8 @@ module "sg_alb" {
   sg_config = [
     {
       application   = var.application
-      service       = var.service_alb
-      functionality = var.functionality_alb
+      service       = var.service_lb
+      functionality = var.functionality_lb #
       description   = "Security group for ALB"
       vpc_id        = data.aws_vpc.vpc.id
 
@@ -73,14 +73,13 @@ module "alb" {
   client        = var.client
   project       = var.project
   application   = var.application
-  functionality = var.functionality_alb
   environment   = var.environment
 
   lb_config = [{
     internal           = false
     load_balancer_type = "application"
     subnets            = [data.aws_subnet.public_subnet_1.id, data.aws_subnet.public_subnet_2.id]
-    security_groups    = [module.sg_alb.sg_info[join("-", ["alb", var.application, var.functionality_alb])].sg_id]
+    security_groups    = [module.sg_alb.sg_info[join("-", [var.service_lb, var.application, var.functionality_lb])].sg_id]
     application        = var.application
 
     # Target Group configuration
@@ -156,7 +155,7 @@ module "sg_ecs_functionality" {
           to_port         = var.port
           protocol        = "tcp"
           cidr_blocks     = []
-          security_groups = [module.sg_alb.sg_info[join("-", ["alb", var.application, var.functionality_alb])].sg_id]
+          security_groups = [module.sg_alb.sg_info[join("-", [var.service_lb, var.application, var.functionality_lb])].sg_id]
           prefix_list_ids = []
           self            = false
           description     = "Allow HTTP inbound security group ALB"
@@ -195,22 +194,22 @@ module "iam" {
   environment = var.environment
 
   iam_config = [
-     # Execution Role (permite que ECS administre la tarea y registre logs)
+    # Execution Role (permite que ECS administre la tarea y registre logs)
     {
-      functionality = var.functionality
-      application   = var.application
-      service       = var.service_execution
-      path          = var.path_execution
-      type          = var.type_execution
-      identifiers   = ["ecs-tasks.amazonaws.com"]
+      functionality        = var.functionality
+      application          = var.application
+      service              = var.service_execution
+      path                 = var.path_execution
+      type                 = var.type_execution
+      identifiers          = ["ecs-tasks.amazonaws.com"]
       principal_conditions = []
       policies = [
         {
           policy_description = "AmazonECSTaskExecutionRolePolicy"
           policy_statements = [
             {
-              sid       = "AllowExecutionRole"
-              actions   = [
+              sid = "AllowExecutionRole"
+              actions = [
                 "ecr:GetAuthorizationToken",
                 "ecr:BatchCheckLayerAvailability",
                 "ecr:GetDownloadUrlForLayer",
@@ -222,20 +221,20 @@ module "iam" {
               resources = ["*"]
               effect    = "Allow"
               condition = []
-            }            
+            }
           ]
         }
       ]
     },
-    
+
     {
-      functionality = var.functionality
-      application   = var.application
-      service       = var.service_task
-      path          = var.path_task
-      type          = var.type_task
-      identifiers   = ["ecs-tasks.amazonaws.com"]
-      principal_conditions = [ ]
+      functionality        = var.functionality
+      application          = var.application
+      service              = var.service_task
+      path                 = var.path_task
+      type                 = var.type_task
+      identifiers          = ["ecs-tasks.amazonaws.com"]
+      principal_conditions = []
       policies = [
         {
           policy_description = "Policy to allow access to S3 and DynamoDB"
@@ -313,6 +312,7 @@ module "ecs_cluster_functionality" {
       enableCapacityProviders = true
     }
   ]
+  depends_on = [ module.alb ]
 }
 
 ###########################################
@@ -330,6 +330,7 @@ module "ecs_service_functionality" {
   client      = var.client
   project     = var.project
   application = var.application
+  aws_region  = var.aws_region
   environment = var.environment
 
   ecs_config = [
@@ -356,7 +357,7 @@ module "ecs_service_functionality" {
         }
       ]
 
-      environment_variables = []
+      environment_variables = var.environment_variables
       volumes               = []
 
       runtime_platform = {

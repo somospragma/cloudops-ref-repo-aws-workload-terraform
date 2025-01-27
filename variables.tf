@@ -59,12 +59,12 @@ variable "arn_acm" {
 #################################################
 # Module SG ALB 
 #################################################
-variable "service_alb" {
+variable "service_lb" {
   type = string
   description = "Service name for security group ALB" 
 }
 
-variable "functionality_alb" {
+variable "functionality_lb" {
   type = string
   description = "Functionality name for security group ALB" 
 }
@@ -118,4 +118,12 @@ variable "health_path" {
 variable "url_image_respository" {
   type = string
   description = "ARN Image respository"
+}
+
+variable "environment_variables" {
+  type = list(object({ 
+    name = string
+    value  = string
+  }))
+  description = "Environment task ECS"
 }

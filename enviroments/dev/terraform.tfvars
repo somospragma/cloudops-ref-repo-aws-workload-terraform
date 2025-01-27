@@ -7,8 +7,8 @@ aws_region  = "us-east-1"
 environment = "dev"
 client      = "pragma"
 project     = "fc"
-application = "app01"
-functionality = "web001"
+application = "tolima"
+functionality = "campeon"
 common_tags = {
   environment  = "dev"
   project-name = "Modulos Referencia"
@@ -38,15 +38,25 @@ type_task          = "Service"
 #################################################
 # ECS - Service - Task - Variables
 #################################################
-arn_acm = "arn:aws:acm:us-east-1:008971642453:certificate/7cb55d32-3f7c-4311-9b78-5d6da1cc6448"
+arn_acm = "arn:aws:acm:us-east-1:008971642453:certificate/ad64a87d-84c0-4f6d-8c7a-143d3dff2dc6"
 cpu = 256
 memory = 512
 port = "80"
 health_path = "/"
 url_image_respository = "008971642453.dkr.ecr.us-east-1.amazonaws.com/pragma-fc-dev-nginx-ecr"
+environment_variables = [
+        {
+          name  = "DD_SITE"
+          value = "datadoghq.com"
+        },
+        {
+          name  = "ECS_FARGATE"
+          value = "TRUE"
+        }
+]
 
 #################################################
 # SG ALB 
 #################################################
-service_alb = "alb"
-functionality_alb = "back"
+service_lb = "lb"
+functionality_lb = "app01"
