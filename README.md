@@ -2,35 +2,35 @@
 
 ## Descripción:
 
-Este módulo combina 7 sub módulos (ecr, elb, iam, rds, ecs cluster, ecs service y security groups) los cuales permiten:
+Este módulo combina 5 sub módulos (elb, iam, ecs cluster, ecs service y security groups) los cuales permiten:
 
-ecr:
-
-- 
 
 elb:
 
--
+- Crear un balanceador de carga.
 
 iam:
 
--
-
-rds:
-
--
+- Crear un rol de IAM.
+- Crear una política de IAM.
+- Asociar la política a un rol.
 
 ecs cluster:
 
--
+- Crear un cluster de ECS
+- Crear un capcity provider para el cluster.
 
 ecs service:
 
--
+- Crear servicios
+- Crear tareas
+- Crear log group para el servicio
+- Crear un target auto scaling
+- Crear una polítca de auto scaling
 
 security groups:
 
-- 
+- Crear security groups.
 
 
 Consulta CHANGELOG.md para la lista de cambios de cada versión. *Recomendamos encarecidamente que en tu código fijes la versión exacta que estás utilizando para que tu infraestructura permanezca estable y actualices las versiones de manera sistemática para evitar sorpresas.*
