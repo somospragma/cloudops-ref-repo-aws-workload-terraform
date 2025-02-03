@@ -2,6 +2,7 @@
 # VPC data name
 # Value comes from Transversal Module
 ###########################################
+
 data "aws_vpc" "vpc" {
   provider = aws.pra_idp_dev
   filter {
@@ -55,6 +56,7 @@ data "aws_subnet" "service_subnet_2" {
 ###########################################
 # Data Account
 ###########################################
+
 data "aws_caller_identity" "current" {
   provider = aws.pra_idp_dev
 }
