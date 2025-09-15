@@ -101,6 +101,22 @@ module "vpc" {
 |------|---------|
 | <a name="provider_aws.project"></a> [aws.project](#provider\_aws) | >= 4.31.0 |
 
+
+## Permisos IAM
+
+Este repositorio requiere el siguiente rol IAM:
+- **Rol**: `TerraformWorkloadRole`
+- **Política**: `iam-policies/workload-policy.json`
+
+### Permisos Incluidos
+- ECS: Gestión completa de clusters, servicios y task definitions
+- ALB: Gestión de load balancers, target groups y listeners
+- ECR: Gestión de repositorios de imágenes Docker
+- Cloud Map: Service discovery y DNS privado
+- Auto Scaling: Configuración de escalado automático
+- CloudWatch: Gestión de logs y métricas
+- VPC/IAM/RDS: Acceso de lectura a recursos dependientes
+
 ## References (PENDIENTE)
 
 | Module | Use | Resources | Varibales | Outputs |
